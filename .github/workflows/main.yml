@@ -27,7 +27,7 @@ jobs:
 
       - name: Tag Docker Image
         run: |
-          docker tag my-app1:latest ghcr.io/${{ github.repository_owner }/my-app1:latest
+          docker tag my-app1:latest ghcr.io/${{ github.repository_owner }}/my-app1:latest
 
       - name: Push Docker Image
         run: |
