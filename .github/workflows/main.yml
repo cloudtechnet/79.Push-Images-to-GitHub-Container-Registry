@@ -1,0 +1,34 @@
+name: Push Image to GitHub Container Registry
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.cloudtechnet }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: docker build -t my-app1:latest .
+
+      - name: Tag Docker Image
+        run: |
+          docker tag my-app1:latest ghcr.io/${{ github.cloudtechnet }}/my-app1:latest
+
+      - name: Push Docker Image
+        run: |
+          docker push ghcr.io/${{ github.cloudtechnet }}/my-app1:latest
