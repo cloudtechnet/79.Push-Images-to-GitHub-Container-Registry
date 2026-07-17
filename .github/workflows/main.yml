@@ -31,4 +31,4 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/${{ github.cloudtechnet }}/my-app1:latest
+          docker push ghcr.io/${{ github.repository_owner }}/my-app1:latest
